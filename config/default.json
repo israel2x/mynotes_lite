@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "mynotes_jwt",
+  "db": "mynotes_db"
+}
