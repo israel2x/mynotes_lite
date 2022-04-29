@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "set NODE_ENV=production && node index.js"
+    "start": "cross-env set NODE_ENV=production && node index.js"
   },
   "keywords": [],
   "author": "",
