@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
-process.env.NODE_ENV = "production";
-const config = require("config");
+//process.env.NODE_ENV = "production";
+const config = require("../config");
 
 module.exports = function () {
-  const dbm = config.get("db");
+  //const dbm = config.get("db");
+  const dbm = config.db;
 
   console.log(dbm);
 

@@ -1,7 +1,7 @@
-const config = require("config");
+const config = require("../config");
 
 module.exports = function () {
-  if (!config.get("jwtPrivateKey")) {
+  if (!config.jwtPrivateKey) {
     throw new Error("FATAL ERROR: jwtPrivateKey is not defined.");
   }
 };
