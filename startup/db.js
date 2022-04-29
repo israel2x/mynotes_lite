@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+process.env.NODE_ENV = "production";
 const config = require("config");
 
 module.exports = function () {
