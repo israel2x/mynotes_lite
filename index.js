@@ -8,7 +8,7 @@ require("./startup/db")();
 require("./startup/prod")(app);
 require("./startup/config")();
 
-const port = process.env.PORT || 9000;
+const port = 9000;
 //app.listen(port, () => console.log(`Listening on port ${port}.... `));
 const server = app.listen(port, () =>
   winston.info(`Listening on port ${port}...`)
