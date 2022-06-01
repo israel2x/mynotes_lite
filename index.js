@@ -3,9 +3,9 @@ const winston = require("winston");
 const app = express();
 
 //require("./startup/logging")();
+require("./startup/prod")(app);
 require("./startup/routes")(app);
 require("./startup/db")();
-require("./startup/prod")(app);
 require("./startup/config")();
 
 const port = 9000;

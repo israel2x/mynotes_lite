@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Note, validate } = require("../models/note");
+const { Note, validate, validateNewNote } = require("../models/note");
 
 //get all notes
 router.get("/", async (req, res) => {
@@ -14,17 +14,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+//get note by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+
+    res.send(note);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ type: "error", message: error.message });
+  }
+});
+
 //new note
 router.post("/", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
   let note = new Note({
-    text: req.body.text,
-    category: [...req.body.category],
-    favority: req.body.favority,
-    scratchpad: req.body.scratchpad,
-    created: req.body.created,
+    text: req.body.body,
+    category: ["NORMAL"],
+    created: req.body.lastUpdated,
     lastUpdated: req.body.lastUpdated,
   });
 
@@ -34,21 +41,15 @@ router.post("/", async (req, res) => {
 
 //update note
 router.put("/:id", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  //const { error } = validate(req.body);
+  //if (error) return res.status(400).send(error.details[0].message);
+  console.log("Nota to Update : ", JSON.stringify(req.body));
 
-  const note = await Note.findByIdAndUpdate(
-    req.params.id,
-    {
-      text: req.body.text,
-      category: [...req.body.category],
-      favority: req.body.favority,
-      scratchpad: req.body.scratchpad,
-      created: req.body.created,
-      lastUpdated: req.body.lastUpdated,
-    },
-    { new: true }
-  );
+  const note = await Note.findByIdAndUpdate(req.body._id, {
+    text: req.body.text,
+    category: ["NORMAL"],
+    lastUpdated: req.body.lastUpdated,
+  });
 
   if (!note)
     return res.status(404).send("The note with the given ID was not found.");

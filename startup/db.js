@@ -6,8 +6,6 @@ module.exports = function () {
   //const dbm = config.get("db");
   const dbm = config.db;
 
-  console.log(dbm);
-
   mongoose
     .connect(dbm)
     .then(() => console.log("Connected to MongoDB..."))
